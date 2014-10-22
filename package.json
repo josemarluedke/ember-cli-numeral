@@ -1,0 +1,22 @@
+{
+  "name": "ember-cli-numeral",
+  "version": "0.1.0",
+  "description": "ember-cli addon support for Numeral.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jayphelps/ember-cli-numeral.git"
+  },
+  "keywords": [
+    "ember-addon"
+  ],
+  "author": "Jay Phelps <hello@jayphelps.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jayphelps/ember-cli-numeral/issues"
+  },
+  "homepage": "https://github.com/jayphelps/ember-cli-numeral"
+}
