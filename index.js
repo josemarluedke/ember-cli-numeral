@@ -10,6 +10,12 @@ module.exports = {
   included: function(app) {
     this._super.included(app);
     this.app.import(app.bowerDirectory + '/numeral/numeral.js');
-    this.app.import('vendor/shims/amd.js');
+    this.app.import('vendor/shims/amd.js', {
+      exports: {
+        numeral: [
+          'default'
+        ]
+      }
+    });
   }
 };
