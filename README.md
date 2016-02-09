@@ -7,8 +7,7 @@ ember-cli addon support for Numeral.js
 # Install
 
 ```bash
-npm install --save-dev ember-cli-numeral;
-bower install --save numeral;
+ember install ember-cli-numeral
 ```
 
 # Usage
