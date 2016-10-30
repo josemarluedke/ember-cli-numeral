@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/jayphelps/ember-cli-numeral/issues"
   },
-  "homepage": "https://github.com/jayphelps/ember-cli-numeral"
+  "homepage": "https://github.com/jayphelps/ember-cli-numeral",
+  "dependencies": {
+    "ember-cli-node-assets": "^0.1.4",
+    "numeral": "^1.5.3"
+  }
 }
