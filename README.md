@@ -38,6 +38,10 @@ var app = new EmberApp(defaults, {
 
 The default configuration is `false`. So languages will not be loaded by default.
 
+## Fastboot compatibility
+
+This addon is compatible with [fastboot](http://ember-fastboot.com/) out of the box.
+
 ## License
 
 `ember-cli-numeral` shims is MIT Licensed.
