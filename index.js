@@ -15,9 +15,13 @@ module.exports = {
           };
         }
 
-        return {
-          import: [ numeralImport, 'languages.js' ]
-        };
+        var filesToImport = [numeralImport];
+
+        if (this.includeLanguages) {
+          filesToImport.push('languages.js');
+        }
+
+        return { import: filesToImport };
       }
     }
   },
@@ -25,7 +29,11 @@ module.exports = {
   included: function(app, parentAddon) {
     var target = (parentAddon || app);
     this.hasShimAMDSupport = ('amdModuleNames' in target);
-    this._super.included.apply(this, arguments);
+    target.options = target.options || { };
+    target.options.numeral = target.options.numeral || { includeLanguages: false };
+    this.includeLanguages = target.options.numeral.includeLanguages;
+
+    this._super.included.call(this, target);
 
     if (!this.hasShimAMDSupport) {
       target.import('vendor/shims/numeral-amd.js', {

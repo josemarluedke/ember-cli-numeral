@@ -23,6 +23,21 @@ let string = numeral(1000).format('0,0');
 
 See the [Numeral.js docs](http://numeraljs.com/) for general usage.
 
+## Including Numeral.js languages
+
+To include all the Numeral.js language definitions, you need to add the
+following configuration to your `ember-cli-build.js`.
+
+```javascript
+var app = new EmberApp(defaults, {
+  numeral: {
+    includeLanguages: true
+  }
+});
+```
+
+The default configuration is `false`. So languages will not be loaded by default.
+
 ## License
 
 `ember-cli-numeral` shims is MIT Licensed.
