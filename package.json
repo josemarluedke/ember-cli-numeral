@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-numeral",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "ES6 accessible module for Numeral.js within your Ember applications.",
   "main": "index.js",
   "scripts": {
