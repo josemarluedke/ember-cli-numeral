@@ -1,21 +1,41 @@
 'use strict';
 
-var path = require('path');
-
 module.exports = {
   name: 'ember-cli-numeral',
-  blueprintsPath: function() {
-    return path.join(__dirname, 'blueprints');
-  },
-  included: function(app) {
-    this._super.included(app);
-    this.app.import(app.bowerDirectory + '/numeral/numeral.js');
-    this.app.import('vendor/shims/amd.js', {
-      exports: {
-        numeral: [
-          'default'
-        ]
+
+  options: {
+    nodeAssets: {
+      numeral: function() {
+        var numeralImport = 'numeral.js';
+
+        if (this.hasShimAMDSupport) {
+          numeralImport = {
+            path: 'numeral.js',
+            using: [{ transformation: 'amd', as: 'numeral' }]
+          };
+        }
+
+        return {
+          import: [ numeralImport, 'languages.js' ]
+        };
       }
-    });
+    }
+  },
+
+  included: function(app, parentAddon) {
+    var target = (parentAddon || app);
+    this.hasShimAMDSupport = ('amdModuleNames' in target);
+    this._super.included.apply(this, arguments);
+
+    if (!this.hasShimAMDSupport) {
+      target.import('vendor/shims/amd.js', {
+        exports: {
+          type: 'vendor',
+          numeral: [
+            'default'
+          ]
+        }
+      });
+    }
   }
 };
