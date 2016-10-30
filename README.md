@@ -1,8 +1,6 @@
-ember-cli-numeral
-=================
+# ember-cli-numeral
 
-ember-cli addon support for Numeral.js
-
+ES6 accessible module for Numeral.js within your Ember applications.
 
 # Install
 
@@ -15,7 +13,7 @@ ember install ember-cli-numeral
 ```javascript
 import numeral from 'numeral';
 
-var string = numeral(1000).format('0,0');
+let string = numeral(1000).format('0,0');
 // '1,000'
 ```
 
