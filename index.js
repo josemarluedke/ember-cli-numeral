@@ -28,7 +28,7 @@ module.exports = {
     this._super.included.apply(this, arguments);
 
     if (!this.hasShimAMDSupport) {
-      target.import('vendor/shims/amd.js', {
+      target.import('vendor/shims/numeral-amd.js', {
         exports: {
           type: 'vendor',
           numeral: [
