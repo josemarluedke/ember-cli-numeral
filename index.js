@@ -18,7 +18,7 @@ module.exports = {
         var filesToImport = [numeralImport];
 
         if (this.includeLanguages) {
-          filesToImport.push('languages.js');
+          filesToImport.push('locales.js');
         }
 
         return { import: filesToImport };
