@@ -1,49 +1,46 @@
 'use strict';
 
+var path = require('path');
+var Funnel = require('broccoli-funnel');
+
 module.exports = {
   name: 'ember-cli-numeral',
 
-  options: {
-    nodeAssets: {
-      numeral: function() {
-        var numeralImport = 'numeral.js';
+  included: function(app) {
+    this.app = app;
 
-        if (this.hasShimAMDSupport) {
-          numeralImport = {
-            path: 'numeral.js',
-            using: [{ transformation: 'amd', as: 'numeral' }]
-          };
-        }
+    if (typeof app.import !== 'function' && app.app) {
+      this.app = app = app.app;
+    }
 
-        var filesToImport = [numeralImport];
+    this._super.included.apply(this, arguments);
 
-        if (this.includeLanguages) {
-          filesToImport.push('languages.js');
-        }
+    var appOptions = app.options || {};
+    var options = appOptions.numeral || {};
 
-        return { import: filesToImport };
-      }
+    var numeralImport = app.env === 'production' ? 'vendor/numeral/min/numeral.min.js' : 'vendor/numeral/numeral.js';
+    var localesImport = app.env === 'production' ? 'vendor/numeral/min/locales.min.js' : 'vendor/numeral/locales.js';
+
+    app.import(numeralImport, {
+      type: 'vendor',
+      using: [{ transformation: 'amd', as: 'numeral' }]
+    });
+
+    if (typeof options.includeLocales === 'boolean' && options.includeLocales) {
+      app.import(localesImport, {
+        type: 'vendor',
+        using: [{ transformation: 'amd', as: 'numeral-locales' }]
+      });
     }
   },
 
-  included: function(app, parentAddon) {
-    var target = (parentAddon || app);
-    this.hasShimAMDSupport = ('amdModuleNames' in target);
-    target.options = target.options || { };
-    target.options.numeral = target.options.numeral || { includeLanguages: false };
-    this.includeLanguages = target.options.numeral.includeLanguages;
+  treeForVendor: function(vendorTree) {
+    var numeralPath = path.dirname(require.resolve('numeral'));
+    var numeralTree = new Funnel(numeralPath, {
+      include: ['numeral.js', 'locales.js', 'min/**/*'],
+      destDir: 'numeral'
+    });
 
-    this._super.included.call(this, target);
-
-    if (!this.hasShimAMDSupport) {
-      target.import('vendor/shims/numeral-amd.js', {
-        exports: {
-          type: 'vendor',
-          numeral: [
-            'default'
-          ]
-        }
-      });
-    }
-  }
+    return numeralTree;
+  },
 };

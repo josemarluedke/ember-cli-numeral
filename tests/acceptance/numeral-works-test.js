@@ -7,6 +7,6 @@ test('visiting /numeral-works', function(assert) {
   visit('/');
 
   andThen(function() {
-    assert.equal(find('.formated-number').text().trim(), '$1,000');
+    assert.equal(find('.formated-number').text().trim(), '₴1 000');
   });
 });
