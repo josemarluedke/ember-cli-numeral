@@ -26,6 +26,10 @@ module.exports = {
       using: [{ transformation: 'amd', as: 'numeral' }]
     });
 
+    if (options.includeLanguages) {
+      throw new Error('includeLanguages option is no longer available. Please use includeLocales (see the README for usage).');
+    }
+
     if (options.includeLocales) {
       for (let locale of options.includeLocales) {
         app.import({
