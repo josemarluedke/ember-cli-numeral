@@ -1,8 +1,8 @@
 /* eslint-env node */
 'use strict';
 
-var path = require('path');
-var Funnel = require('broccoli-funnel');
+let path = require('path');
+let Funnel = require('broccoli-funnel');
 
 module.exports = {
   name: 'ember-cli-numeral',
@@ -16,29 +16,32 @@ module.exports = {
 
     this._super.included.apply(this, arguments);
 
-    var appOptions = app.options || {};
-    var options = appOptions.numeral || {};
+    let appOptions = app.options || {};
+    let options = appOptions.numeral || {};
 
-    var numeralImport = app.env === 'production' ? 'vendor/numeral/min/numeral.min.js' : 'vendor/numeral/numeral.js';
-    var localesImport = app.env === 'production' ? 'vendor/numeral/min/locales.min.js' : 'vendor/numeral/locales.js';
-
-    app.import(numeralImport, {
-      type: 'vendor',
+    app.import({
+      development: 'vendor/numeral/numeral.js',
+      production: 'vendor/numeral/min/numeral.min.js'
+    }, {
       using: [{ transformation: 'amd', as: 'numeral' }]
     });
 
-    if (typeof options.includeLocales === 'boolean' && options.includeLocales) {
-      app.import(localesImport, {
-        type: 'vendor',
-        using: [{ transformation: 'amd', as: 'numeral-locales' }]
-      });
+    if (options.includeLocales) {
+      for (let locale of options.includeLocales) {
+        app.import({
+          development: `vendor/numeral/locales/${locale}.js`,
+          production: `vendor/numeral/min/locales/${locale}.min.js`
+        }, {
+          using: [{ transformation: 'amd', as: `numeral/${locale}` }]
+        });
+      }
     }
   },
 
-  treeForVendor: function(vendorTree) {
-    var numeralPath = path.dirname(require.resolve('numeral'));
-    var numeralTree = new Funnel(numeralPath, {
-      include: ['numeral.js', 'locales.js', 'min/**/*'],
+  treeForVendor: function(/* vendorTree */) {
+    let numeralPath = path.dirname(require.resolve('numeral'));
+    let numeralTree = new Funnel(numeralPath, {
+      include: ['numeral.js', 'locales/**/*', 'min/**/*'],
       destDir: 'numeral'
     });
 

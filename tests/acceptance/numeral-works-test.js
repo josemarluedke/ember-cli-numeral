@@ -8,5 +8,6 @@ test('visiting /numeral-works', function(assert) {
 
   andThen(function() {
     assert.equal(find('.formated-number').text().trim(), '₴1 000');
+    assert.equal(find('.other-number').text().trim(), '€1 000');
   });
 });

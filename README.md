@@ -29,20 +29,29 @@ To include all the Numeral.js locales definitions, you need to add the
 following configuration to your `ember-cli-build.js`.
 
 ```javascript
-var app = new EmberApp(defaults, {
+let app = new EmberApp(defaults, {
   numeral: {
-    includeLocales: true
+    includeLocales: ['en-gb', 'pl']
   }
 });
 ```
 
-Then import locales to register them:
+Then import locales to register them, and activate them:
 
 ```javascript
-import 'numeral-locales';
+import numeral from 'numeral';
+import 'numeral/en-gb';
+import 'numeral/pl';
+
+let string = numeral.locale('pl') && numeral(1000).format('0,0 $');
+
+numeral.locale('en-gb');
+let string2 = numeral(50).format('0.0[0]');
+
+numeral.locale('en');
 ```
 
-The default configuration is `false`. So locales will not be loaded by default.
+Note: the "en" locale is loaded by default.
 
 ## FastBoot compatibility
 
