@@ -39,14 +39,14 @@ var app = new EmberApp(defaults, {
 Then import locales to register them:
 
 ```javascript
-import numeral-locales from 'numeral-locales'; // jshint ignore:line
+import 'numeral-locales';
 ```
 
 The default configuration is `false`. So locales will not be loaded by default.
 
-## Fastboot compatibility
+## FastBoot compatibility
 
-This addon is compatible with [fastboot](http://ember-fastboot.com/) out of the box.
+This addon is compatible with [FastBoot](http://ember-fastboot.com/) out of the box.
 
 ## License
 

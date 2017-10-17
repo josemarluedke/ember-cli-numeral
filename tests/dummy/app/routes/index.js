@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import numeral from 'numeral';
-import locales from 'numeral-locales'; // jshint ignore:line
+import 'numeral-locales';
 
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     numeral.locale('uk-ua');
 
