@@ -23,24 +23,39 @@ let string = numeral(1000).format('0,0');
 
 See the [Numeral.js docs](http://numeraljs.com/) for general usage.
 
-## Including Numeral.js languages
+## Including Numeral.js locales
 
-To include all the Numeral.js language definitions, you need to add the
+To include all the Numeral.js locales definitions, you need to add the
 following configuration to your `ember-cli-build.js`.
 
 ```javascript
-var app = new EmberApp(defaults, {
+let app = new EmberApp(defaults, {
   numeral: {
-    includeLanguages: true
+    includeLocales: ['en-gb', 'pl']
   }
 });
 ```
 
-The default configuration is `false`. So languages will not be loaded by default.
+Then import locales to register them, and activate them:
 
-## Fastboot compatibility
+```javascript
+import numeral from 'numeral';
+import 'numeral/en-gb';
+import 'numeral/pl';
 
-This addon is compatible with [fastboot](http://ember-fastboot.com/) out of the box.
+let string = numeral.locale('pl') && numeral(1000).format('0,0 $');
+
+numeral.locale('en-gb');
+let string2 = numeral(50).format('0.0[0]');
+
+numeral.locale('en');
+```
+
+Note: the "en" locale is loaded by default.
+
+## FastBoot compatibility
+
+This addon is compatible with [FastBoot](http://ember-fastboot.com/) out of the box.
 
 ## License
 
