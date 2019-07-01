@@ -1,8 +1,11 @@
+## WARNING! 
+
+You don't need this addon anymore when using [ember-auto-import](https://github.com/ef4/ember-auto-import). You can import [numeral.js](https://github.com/adamwdraper/Numeral-js) directly from NPM. The only difference in imports will be on locates. Instead of importing `import 'numeral/pl';` you would import `import 'numeral/locales/pl';`.
+
 # ember-cli-numeral
 [![Build Status](https://travis-ci.org/josemarluedke/ember-cli-numeral.svg?branch=master)](https://travis-ci.org/josemarluedke/ember-cli-numeral)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-numeral.svg)](https://emberobserver.com/addons/ember-cli-numeral)
 [![NPM Version](https://img.shields.io/npm/v/ember-cli-numeral.svg?style=flat-square)](https://www.npmjs.com/package/ember-cli-numeral)
-[![Ember badge](https://embadge.io/v1/badge.svg?start=1.13.0)](https://embadge.io/)
 
 ES6 accessible module for Numeral.js within your Ember applications.
 
